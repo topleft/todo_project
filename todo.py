@@ -1,5 +1,5 @@
 import sqlite3
-from bottle import route, run, debug, template, request
+from bottle import route, run, debug, template, request, validate
 
 @route('/todo')
 def todo_list():
@@ -31,6 +31,7 @@ def new_item():
 
 
 @route('/edit/:no', method='GET')
+@validate(no=int)
 def edit_item(no):
 	if request.GET.get('save', '').strip():
 		edit = request.GET.get('task', '').strip()
